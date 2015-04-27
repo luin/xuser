@@ -37,8 +37,9 @@ app.set('views', __dirname + '/app/fe/views');
 // required for passport
 var options = {host:"127.0.0.1",
     port: 6379};
+var Redis = require('ioredis');
 app.use(session({
-    store: new RedisStore(options),
+    store: new RedisStore({ client: new Redis(options) }),
     secret: sessionConf.secret
 }));
 
